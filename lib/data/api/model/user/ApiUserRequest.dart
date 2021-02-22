@@ -9,5 +9,5 @@ class ApiUserRequest {
 
   ApiUserRequest({this.email, this.password});
 
-  Map<String, dynamic> toJson() => _$ApiUserRequestoToJson(this);
+  Map<String, dynamic> toJson() => _$ApiUserRequestToJson(this);
 }
