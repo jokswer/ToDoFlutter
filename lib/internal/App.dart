@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:ToDoFlutter/src/screens/Notes.dart';
-import 'package:ToDoFlutter/src/screens/Authorization.dart';
+import 'package:ToDoFlutter/presentation/Authorization.dart';
+import 'package:ToDoFlutter/presentation/Notes.dart';
 
 class App extends StatelessWidget {
   @override
