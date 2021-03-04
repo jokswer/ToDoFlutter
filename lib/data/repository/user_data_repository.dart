@@ -1,9 +1,9 @@
-import 'package:ToDoFlutter/data/api/model/user/ApiUserRequest.dart';
-import 'package:ToDoFlutter/data/api/model/user/ApiUserResponse.dart';
-import 'package:ToDoFlutter/data/api/service/user/UserService.dart';
-import 'package:ToDoFlutter/data/mapper/UserMapper.dart';
-import 'package:ToDoFlutter/domain/model/User.dart';
-import 'package:ToDoFlutter/domain/repository/UserRepsitory.dart';
+import 'package:ToDoFlutter/data/api/model/user/api_user_request.dart';
+import 'package:ToDoFlutter/data/api/model/user/api_user_response.dart';
+import 'package:ToDoFlutter/data/api/service/user/user_service.dart';
+import 'package:ToDoFlutter/data/mapper/user_mapper.dart';
+import 'package:ToDoFlutter/domain/model/user.dart';
+import 'package:ToDoFlutter/domain/repository/user_repsitory.dart';
 
 class UserDataRepository extends UserRepository {
   final UserService _service;

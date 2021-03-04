@@ -1,4 +1,4 @@
-import 'package:ToDoFlutter/domain/model/User.dart';
+import 'package:ToDoFlutter/domain/model/user.dart';
 
 abstract class UserRepository {
   Future<User> auth({String email, String password});

@@ -1,7 +1,7 @@
-import 'package:ToDoFlutter/data/api/model/user/ApiUser.dart';
+import 'package:ToDoFlutter/data/api/model/user/api_user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ApiUserResponse.g.dart';
+part 'api_user_response.g.dart';
 
 @JsonSerializable()
 class ApiUserResponse {

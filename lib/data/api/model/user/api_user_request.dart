@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ApiUserRequest.g.dart';
+part 'api_user_request.g.dart';
 
 @JsonSerializable()
 class ApiUserRequest {

@@ -1,5 +1,5 @@
-import 'package:ToDoFlutter/data/api/model/user/ApiUser.dart';
-import 'package:ToDoFlutter/domain/model/User.dart';
+import 'package:ToDoFlutter/data/api/model/user/api_user.dart';
+import 'package:ToDoFlutter/domain/model/user.dart';
 
 class UserMapper {
   static User fromApi(ApiUser user) {
