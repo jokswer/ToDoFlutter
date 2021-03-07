@@ -5,11 +5,11 @@ import 'package:retrofit/retrofit.dart';
 
 part 'user_service.g.dart';
 
-@RestApi(baseUrl: 'http://127.0.0.0:3000/Users/')
+@RestApi(baseUrl: 'http://10.0.2.2:3011/api/Users')
 abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
-  @POST('/')
+  @POST('')
   Future<ApiUserResponse> auth(@Body() ApiUserRequest body);
 
   @POST('/login')

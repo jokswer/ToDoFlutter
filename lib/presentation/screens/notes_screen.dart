@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ToDoFlutter/presentation/components/note_card.dart';
 
 class NotesScreen extends StatelessWidget {
   
@@ -12,18 +13,8 @@ class NotesScreen extends StatelessWidget {
           ),
           itemCount: 10,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: Colors.amber,
-              child: Center(child: Text('$index')),
-            );
+            return NoteCard();
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          
-        },
-        child: const Icon(Icons.plus_one),
-        backgroundColor: Colors.teal,
-      ),
     );
   }
 }

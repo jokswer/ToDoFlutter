@@ -9,7 +9,7 @@ part of 'user_service.dart';
 class _UserService implements UserService {
   _UserService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    baseUrl ??= 'http://127.0.0.0:3000/Users/';
+    baseUrl ??= 'http://10.0.2.2:3011/api/Users';
   }
 
   final Dio _dio;
@@ -23,7 +23,7 @@ class _UserService implements UserService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body?.toJson() ?? <String, dynamic>{});
-    final _result = await _dio.request<Map<String, dynamic>>('/',
+    final _result = await _dio.request<Map<String, dynamic>>('',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',

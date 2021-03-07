@@ -4,13 +4,20 @@ class Input extends StatelessWidget {
   final String labelText;
   final TextInputType keyboardType;
   final bool obscureText;
+  final TextEditingController controller;
 
-  const Input({Key key, this.labelText, this.keyboardType, this.obscureText})
+  const Input(
+      {Key key,
+      this.labelText,
+      this.keyboardType,
+      this.obscureText,
+      this.controller})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(

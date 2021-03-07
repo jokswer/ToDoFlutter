@@ -5,9 +5,10 @@ import 'package:dio/dio.dart';
 
 class RepositoryModule {
   static UserRepository _userRepository;
+  static final Dio _dio = Dio();
 
   static UserRepository userRepository() {
-    _userRepository ??= UserDataRepository(UserService(Dio()));
+    _userRepository ??= UserDataRepository(UserService(_dio));
     return _userRepository;
   }
 }

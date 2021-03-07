@@ -18,7 +18,9 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () => onPressed(),
+        onPressed: () {
+          onPressed();
+        },
         child: Container(
           child: Center(
             child: Text(
