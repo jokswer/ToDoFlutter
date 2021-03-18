@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import 'package:ToDoFlutter/domain/model/user.dart';
-import 'package:ToDoFlutter/domain/repository/user_repsitory.dart';
+import 'package:ToDoFlutter/domain/repository/user_repository.dart';
 
 part 'auth_state.g.dart';
 
@@ -13,7 +13,10 @@ abstract class AuthStateBase with Store {
   AuthStateBase(this._userRepository);
 
   @observable
-  bool isLoading = false;
+  bool isAuthLoading = false;
+
+  @observable
+  bool isLoginLoading = false;
 
   @observable
   User user;
@@ -21,21 +24,21 @@ abstract class AuthStateBase with Store {
   @action
   Future<void> auth({String email, String password}) async {
     try {
-      isLoading = true;
+      isAuthLoading = true;
 
       await _userRepository.auth(email: email, password: password);
-      
+
     } catch (e) {
       print(e);
     } finally {
-      isLoading = false;
+      isAuthLoading = false;
     }
   }
 
   @action
   Future<void> login({String email, String password}) async {
     try {
-      isLoading = true;
+      isLoginLoading = true;
 
       final User data =
           await _userRepository.login(email: email, password: password);
@@ -44,7 +47,7 @@ abstract class AuthStateBase with Store {
     } catch (e) {
       print(e);
     } finally {
-      isLoading = false;
+      isLoginLoading = false;
     }
   }
 }

@@ -9,7 +9,7 @@ part of 'user_service.dart';
 class _UserService implements UserService {
   _UserService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    baseUrl ??= 'http://10.0.2.2:3011/api/Users';
+    baseUrl ??= 'http://127.0.0.1:3000/api/Users';
   }
 
   final Dio _dio;
@@ -17,7 +17,7 @@ class _UserService implements UserService {
   String baseUrl;
 
   @override
-  Future<ApiUserResponse> auth(body) async {
+  Future<ApiUserRegistrationResponse> auth(body) async {
     ArgumentError.checkNotNull(body, 'body');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -31,7 +31,7 @@ class _UserService implements UserService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = ApiUserResponse.fromJson(_result.data);
+    final value = ApiUserRegistrationResponse.fromJson(_result.data);
     return value;
   }
 

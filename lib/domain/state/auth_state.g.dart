@@ -9,18 +9,33 @@ part of 'auth_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthState on AuthStateBase, Store {
-  final _$isLoadingAtom = Atom(name: 'AuthStateBase.isLoading');
+  final _$isAuthLoadingAtom = Atom(name: 'AuthStateBase.isAuthLoading');
 
   @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
+  bool get isAuthLoading {
+    _$isAuthLoadingAtom.reportRead();
+    return super.isAuthLoading;
   }
 
   @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
+  set isAuthLoading(bool value) {
+    _$isAuthLoadingAtom.reportWrite(value, super.isAuthLoading, () {
+      super.isAuthLoading = value;
+    });
+  }
+
+  final _$isLoginLoadingAtom = Atom(name: 'AuthStateBase.isLoginLoading');
+
+  @override
+  bool get isLoginLoading {
+    _$isLoginLoadingAtom.reportRead();
+    return super.isLoginLoading;
+  }
+
+  @override
+  set isLoginLoading(bool value) {
+    _$isLoginLoadingAtom.reportWrite(value, super.isLoginLoading, () {
+      super.isLoginLoading = value;
     });
   }
 
@@ -58,7 +73,8 @@ mixin _$AuthState on AuthStateBase, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
+isAuthLoading: ${isAuthLoading},
+isLoginLoading: ${isLoginLoading},
 user: ${user}
     ''';
   }
