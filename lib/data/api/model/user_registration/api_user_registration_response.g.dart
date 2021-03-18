@@ -9,14 +9,14 @@ part of 'api_user_registration_response.dart';
 ApiUserRegistrationResponse _$ApiUserRegistrationResponseFromJson(
     Map<String, dynamic> json) {
   return ApiUserRegistrationResponse(
-    json['result'] == null
-        ? null
-        : ApiUserRegistration.fromJson(json['result'] as Map<String, dynamic>),
+    email: json['email'] as String,
+    id: json['id'] as int,
   );
 }
 
 Map<String, dynamic> _$ApiUserRegistrationResponseToJson(
         ApiUserRegistrationResponse instance) =>
     <String, dynamic>{
-      'result': instance.result,
+      'email': instance.email,
+      'id': instance.id,
     };

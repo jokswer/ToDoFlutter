@@ -57,7 +57,7 @@ mixin _$AuthState on AuthStateBase, Store {
   final _$authAsyncAction = AsyncAction('AuthStateBase.auth');
 
   @override
-  Future<void> auth({String email, String password}) {
+  Future<bool> auth({String email, String password}) {
     return _$authAsyncAction
         .run(() => super.auth(email: email, password: password));
   }
@@ -65,7 +65,7 @@ mixin _$AuthState on AuthStateBase, Store {
   final _$loginAsyncAction = AsyncAction('AuthStateBase.login');
 
   @override
-  Future<void> login({String email, String password}) {
+  Future<bool> login({String email, String password}) {
     return _$loginAsyncAction
         .run(() => super.login(email: email, password: password));
   }

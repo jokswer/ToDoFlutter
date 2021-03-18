@@ -22,21 +22,28 @@ abstract class AuthStateBase with Store {
   User user;
 
   @action
-  Future<void> auth({String email, String password}) async {
+  Future<bool> auth({String email, String password}) async {
     try {
       isAuthLoading = true;
 
       await _userRepository.auth(email: email, password: password);
 
+      await login(email: email, password: password);
+
+      print(user);
+      if (user != null) 
+        return true;
+      return false;
     } catch (e) {
       print(e);
+      return false;
     } finally {
       isAuthLoading = false;
     }
   }
 
   @action
-  Future<void> login({String email, String password}) async {
+  Future<bool> login({String email, String password}) async {
     try {
       isLoginLoading = true;
 
@@ -44,8 +51,13 @@ abstract class AuthStateBase with Store {
           await _userRepository.login(email: email, password: password);
 
       user = data;
+
+      if (user != null) 
+        return true;
+      return false;
     } catch (e) {
       print(e);
+      return false;
     } finally {
       isLoginLoading = false;
     }

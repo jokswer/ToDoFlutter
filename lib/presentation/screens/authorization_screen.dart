@@ -1,5 +1,6 @@
-import 'package:ToDoFlutter/internal/dependencies/auth_module.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:ToDoFlutter/internal/dependencies/auth_module.dart';
 import 'package:ToDoFlutter/presentation/components/button.dart';
 import 'package:ToDoFlutter/presentation/components/input.dart';
 import 'package:ToDoFlutter/presentation/components/app_title.dart';
@@ -25,11 +26,11 @@ class _AuthorizationState extends State<AuthorizationScreen> {
     _authState = AuthModule.authState();
   }
 
-  void _auth() {
+  void _login() {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    _authState.auth(email: email, password: password);
+    _authState.login(email: email, password: password);
   }
 
   void _navigateToRegisration(BuildContext context) {
@@ -63,15 +64,20 @@ class _AuthorizationState extends State<AuthorizationScreen> {
                 obscureText: true,
               ),
             ),
-            Button(
-              onPressed: _auth,
-              title: 'Авторизоваться',
-            ),
+            Observer(builder: (_) {
+              if (_authState.isLoginLoading)
+                return const CircularProgressIndicator();
+
+              return Button(
+                onPressed: _login,
+                title: 'Войти',
+              );
+            }),
             TextButton(
                 onPressed: () {
                   _navigateToRegisration(context);
                 },
-                child: const Text('Нет аккаунта?'))
+                child: const Text('Нет аккаунта?')),
           ],
         ),
       ),

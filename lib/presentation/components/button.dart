@@ -10,7 +10,7 @@ class Button extends StatelessWidget {
       {Key key,
       this.title,
       this.color = Colors.teal,
-      this.width = 150,
+      this.width = 160,
       this.height = 50,
       this.onPressed})
       : super(key: key);
