@@ -30,7 +30,6 @@ abstract class AuthStateBase with Store {
 
       await login(email: email, password: password);
 
-      print(user);
       if (user != null) 
         return true;
       return false;

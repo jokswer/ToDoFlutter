@@ -29,7 +29,7 @@ class _RegistrationState extends State<RegistrationScreen> {
   void _auth(BuildContext context) {
     final String email = _emailController.text;
     final String password = _passwordController.text;
-    print(email);
+
     _authState.auth(email: email, password: password).then((bool result) {
       if (result) 
         Navigator.pushReplacementNamed(context, notes);
