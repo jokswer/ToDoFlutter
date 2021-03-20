@@ -31,8 +31,8 @@ class _RegistrationState extends State<RegistrationScreen> {
     final String password = _passwordController.text;
 
     _authState.auth(email: email, password: password).then((bool result) {
-      if (result) 
-        Navigator.pushReplacementNamed(context, notes);
+      if (result)
+        Navigator.pushNamedAndRemoveUntil(context, notes, (_) => false);
     });
   }
 

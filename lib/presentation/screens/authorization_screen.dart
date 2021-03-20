@@ -30,7 +30,10 @@ class _AuthorizationState extends State<AuthorizationScreen> {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    _authState.login(email: email, password: password);
+    _authState.login(email: email, password: password).then((bool result) {
+      if (result)
+        Navigator.pushNamedAndRemoveUntil(context, notes, (_) => false);
+    });
   }
 
   void _navigateToRegisration(BuildContext context) {
