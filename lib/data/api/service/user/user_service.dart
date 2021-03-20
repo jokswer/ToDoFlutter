@@ -7,7 +7,6 @@ import 'package:retrofit/retrofit.dart';
 
 part 'user_service.g.dart';
 
-//http://10.0.2.2:3011/api/Users
 @RestApi(baseUrl: 'http://127.0.0.1:3000/api/Users')
 abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
