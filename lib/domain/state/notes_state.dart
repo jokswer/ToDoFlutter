@@ -14,4 +14,12 @@ abstract class NotesStateBase with Store {
   @observable
   List<Note> notes;
 
+  @action
+  Future<void> receive() async {
+    try {
+     notes =  await _notesRepository.receive();
+    } catch (e) {
+    }
+  }
+
 }

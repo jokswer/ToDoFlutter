@@ -24,6 +24,13 @@ mixin _$NotesState on NotesStateBase, Store {
     });
   }
 
+  final _$receiveAsyncAction = AsyncAction('NotesStateBase.receive');
+
+  @override
+  Future<void> receive() {
+    return _$receiveAsyncAction.run(() => super.receive());
+  }
+
   @override
   String toString() {
     return '''
