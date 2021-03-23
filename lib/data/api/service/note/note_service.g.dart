@@ -70,4 +70,23 @@ class _NoteService implements NoteService {
     final value = ApiNoteResponse.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<List<ApiNoteResponse>> receive() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<List<dynamic>>('',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    var value = _result.data
+        .map((dynamic i) => ApiNoteResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
 }

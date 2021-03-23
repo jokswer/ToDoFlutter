@@ -6,4 +6,6 @@ abstract class NotesRepository {
   Future<void> delete({int id});
 
   Future<Note> edit({String title, String body, bool done, int id});
+
+  Future<List<Note>> receive();
 }

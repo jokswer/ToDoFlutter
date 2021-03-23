@@ -11,4 +11,7 @@ abstract class NotesStateBase with Store {
 
   NotesStateBase(this._notesRepository);
 
+  @observable
+  List<Note> notes;
+
 }

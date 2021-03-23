@@ -24,5 +24,11 @@ class NotesDataReposytory extends NotesRepository {
     // TODO: implement edit
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<Note>> receive() {
+    // TODO: implement receive
+    throw UnimplementedError();
+  }
   
 }
