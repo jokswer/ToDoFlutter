@@ -18,7 +18,6 @@ class _NotesState extends State<NotesScreen> {
   void initState() {
     super.initState();
     _notesState = NotesModule.notesState();
-
     _notesState.receive();
   }
 

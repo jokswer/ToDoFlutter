@@ -17,9 +17,9 @@ abstract class NotesStateBase with Store {
   @action
   Future<void> receive() async {
     try {
-     notes =  await _notesRepository.receive();
+      notes = await _notesRepository.receive();
     } catch (e) {
+      print('receiveError ${e.toString()}');
     }
   }
-
 }

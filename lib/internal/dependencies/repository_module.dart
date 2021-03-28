@@ -10,7 +10,7 @@ class RepositoryModule {
   static UserRepository _userRepository;
   static NotesRepository _notesRepository;
   static final Dio _dio = Dio();
-
+  
   static UserRepository userRepository() {
     _userRepository ??= UserDataRepository(UserService(_dio));
     return _userRepository;

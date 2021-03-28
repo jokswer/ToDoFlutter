@@ -50,7 +50,7 @@ abstract class AuthStateBase with Store {
           await _userRepository.login(email: email, password: password);
 
       user = data;
-
+      print(data.id);
       if (user != null) 
         return true;
       return false;
