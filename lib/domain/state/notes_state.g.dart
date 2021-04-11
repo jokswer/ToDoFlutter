@@ -61,6 +61,13 @@ mixin _$NotesState on NotesStateBase, Store {
     return _$deleteAsyncAction.run(() => super.delete(id: id));
   }
 
+  final _$editAsyncAction = AsyncAction('NotesStateBase.edit');
+
+  @override
+  Future<bool> edit(Note note) {
+    return _$editAsyncAction.run(() => super.edit(note));
+  }
+
   @override
   String toString() {
     return '''

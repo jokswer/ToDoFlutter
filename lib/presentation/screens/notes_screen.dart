@@ -1,3 +1,5 @@
+import 'package:ToDoFlutter/domain/model/note.dart';
+import 'package:ToDoFlutter/presentation/screens/note_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:ToDoFlutter/routes/paths.dart';
@@ -17,11 +19,19 @@ class _NotesState extends State<NotesScreen> {
   void initState() {
     super.initState();
 
+    _receive();
+  }
+
+  void _receive() {
     context.read<NotesState>().receive();
   }
 
-  void _navigateToNote(BuildContext context) {
-    Navigator.pushNamed(context, note);
+  void _navigateToNote(BuildContext context, [Note noteItem]) {
+    Navigator.pushNamed(
+      context,
+      note,
+      arguments: NoteScreen(note: noteItem),
+    );
   }
 
   void _delete(int id) {
@@ -80,7 +90,7 @@ class _NotesState extends State<NotesScreen> {
                   return NoteCard(
                     note: notesState.notes[index],
                     onCardTap: () {
-                      _navigateToNote(context);
+                      _navigateToNote(context, notesState.notes[index]);
                     },
                     onDeleteTap: () {
                       _delete(notesState.notes[index].id);

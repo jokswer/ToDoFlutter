@@ -55,14 +55,15 @@ class _NoteService implements NoteService {
   }
 
   @override
-  Future<ApiNoteResponse> edit(token, body) async {
+  Future<ApiNoteResponse> edit(token, body, id) async {
     ArgumentError.checkNotNull(token, 'token');
     ArgumentError.checkNotNull(body, 'body');
+    ArgumentError.checkNotNull(id, 'id');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body?.toJson() ?? <String, dynamic>{});
-    final _result = await _dio.request<Map<String, dynamic>>('',
+    final _result = await _dio.request<Map<String, dynamic>>('/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'PUT',

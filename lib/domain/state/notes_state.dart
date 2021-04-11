@@ -51,4 +51,18 @@ abstract class NotesStateBase with Store {
       print('deleteError ${e.toString()}');
     }
   }
+
+  @action
+  Future<bool> edit(Note note) async {
+    try {
+      await _notesRepository.edit(
+          id: note.id, title: note.title, body: note.body, done: note.done);
+      await receive();
+
+      return true;
+    } catch (e) {
+      print('editError ${e.toString()}');
+      return false;
+    }
+  }
 }

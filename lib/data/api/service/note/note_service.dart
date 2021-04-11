@@ -16,9 +16,9 @@ abstract class NoteService {
   @DELETE('/{id}')
   Future<void> delete(@Header('access_token') String token, @Path() int id);
 
-  @PUT('')
+  @PUT('/{id}')
   Future<ApiNoteResponse> edit(
-      @Header('access_token') String token, @Body() ApiNoteRequest body);
+      @Header('access_token') String token, @Body() ApiNoteRequest body, @Path() int id);
 
   @GET('')
   Future<List<ApiNoteResponse>> receive(@Header('access_token') String token);

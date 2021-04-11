@@ -29,9 +29,13 @@ class NotesDataReposytory extends NotesRepository {
   }
 
   @override
-  Future<Note> edit({String title, String body, bool done, int id}) {
-    // TODO: implement edit
-    throw UnimplementedError();
+  Future<Note> edit({String title, String body, bool done, int id}) async {
+    final ApiNoteRequest request =
+        ApiNoteRequest(title: title, body: body, done: done);
+
+    final ApiNoteResponse response = await _service.edit(token, request, id);
+
+    return NoteMapper.fromApi(response.result);
   }
 
   @override
