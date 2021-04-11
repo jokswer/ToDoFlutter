@@ -17,7 +17,8 @@ class _NoteService implements NoteService {
   String baseUrl;
 
   @override
-  Future<ApiNoteResponse> create(body) async {
+  Future<ApiNoteResponse> create(token, body) async {
+    ArgumentError.checkNotNull(token, 'token');
     ArgumentError.checkNotNull(body, 'body');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -27,7 +28,7 @@ class _NoteService implements NoteService {
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
-            headers: <String, dynamic>{},
+            headers: <String, dynamic>{r'access_token': token},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
@@ -36,7 +37,8 @@ class _NoteService implements NoteService {
   }
 
   @override
-  Future<void> delete(id) async {
+  Future<void> delete(token, id) async {
+    ArgumentError.checkNotNull(token, 'token');
     ArgumentError.checkNotNull(id, 'id');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -45,7 +47,7 @@ class _NoteService implements NoteService {
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'DELETE',
-            headers: <String, dynamic>{},
+            headers: <String, dynamic>{r'access_token': token},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
@@ -53,7 +55,8 @@ class _NoteService implements NoteService {
   }
 
   @override
-  Future<ApiNoteResponse> edit(body) async {
+  Future<ApiNoteResponse> edit(token, body) async {
+    ArgumentError.checkNotNull(token, 'token');
     ArgumentError.checkNotNull(body, 'body');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -63,7 +66,7 @@ class _NoteService implements NoteService {
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'PUT',
-            headers: <String, dynamic>{},
+            headers: <String, dynamic>{r'access_token': token},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
@@ -72,7 +75,8 @@ class _NoteService implements NoteService {
   }
 
   @override
-  Future<List<ApiNoteResponse>> receive() async {
+  Future<List<ApiNoteResponse>> receive(token) async {
+    ArgumentError.checkNotNull(token, 'token');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -80,7 +84,7 @@ class _NoteService implements NoteService {
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
-            headers: <String, dynamic>{},
+            headers: <String, dynamic>{r'access_token': token},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);

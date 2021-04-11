@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:retrofit/retrofit.dart';
 import 'package:ToDoFlutter/data/api/model/note/api_note_request.dart';
 import 'package:ToDoFlutter/data/api/model/note/api_note_response.dart';
@@ -10,14 +10,16 @@ abstract class NoteService {
   factory NoteService(Dio dio, {String baseUrl}) = _NoteService;
 
   @POST('')
-  Future<ApiNoteResponse> create(@Body() ApiNoteRequest body);
+  Future<ApiNoteResponse> create(
+      @Header('access_token') String token, @Body() ApiNoteRequest body);
 
   @DELETE('/{id}')
-  Future<void> delete(@Path() int id);
+  Future<void> delete(@Header('access_token') String token, @Path() int id);
 
   @PUT('')
-  Future<ApiNoteResponse> edit(@Body() ApiNoteRequest body);
+  Future<ApiNoteResponse> edit(
+      @Header('access_token') String token, @Body() ApiNoteRequest body);
 
   @GET('')
-  Future<List<ApiNoteResponse>> receive();
+  Future<List<ApiNoteResponse>> receive(@Header('access_token') String token);
 }
