@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 class Input extends StatelessWidget {
   final String labelText;
   final TextInputType keyboardType;
-  final bool obscureText;
   final TextEditingController controller;
+  bool obscureText = false;
+  int maxLines;
+  
 
-  const Input(
+  Input(
       {Key key,
       this.labelText,
       this.keyboardType,
       this.obscureText,
-      this.controller})
+      this.controller,
+      this.maxLines = 1})
       : super(key: key);
 
   @override
@@ -29,6 +32,7 @@ class Input extends StatelessWidget {
           labelText: labelText,
           labelStyle: const TextStyle(color: Colors.teal)),
       keyboardType: keyboardType,
+      maxLines: maxLines,
     );
   }
 }
