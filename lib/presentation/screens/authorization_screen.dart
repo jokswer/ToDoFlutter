@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:ToDoFlutter/internal/dependencies/auth_module.dart';
 import 'package:ToDoFlutter/presentation/components/button.dart';
 import 'package:ToDoFlutter/presentation/components/input.dart';
 import 'package:ToDoFlutter/presentation/components/app_title.dart';
 import 'package:ToDoFlutter/domain/state/auth_state.dart';
 import 'package:ToDoFlutter/routes/paths.dart';
+import 'package:provider/provider.dart';
 
 class AuthorizationScreen extends StatefulWidget {
   @override
@@ -18,19 +18,13 @@ class _AuthorizationState extends State<AuthorizationScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  AuthState _authState;
+  void _login(BuildContext context) {
+    final AuthState authState = Provider.of<AuthState>(context, listen: false);
 
-  @override
-  void initState() {
-    super.initState();
-    _authState = AuthModule.authState();
-  }
-
-  void _login() {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    _authState.login(email: email, password: password).then((bool result) {
+    authState.login(email: email, password: password).then((bool result) {
       if (result)
         Navigator.pushNamedAndRemoveUntil(context, notes, (_) => false);
     });
@@ -42,6 +36,8 @@ class _AuthorizationState extends State<AuthorizationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthState authState = Provider.of<AuthState>(context);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -68,11 +64,13 @@ class _AuthorizationState extends State<AuthorizationScreen> {
               ),
             ),
             Observer(builder: (_) {
-              if (_authState.isLoginLoading)
+              if (authState.isLoginLoading)
                 return const CircularProgressIndicator();
 
               return Button(
-                onPressed: _login,
+                onPressed: () {
+                  _login(context);
+                },
                 title: 'Войти',
               );
             }),

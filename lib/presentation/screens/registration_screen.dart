@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:ToDoFlutter/routes/paths.dart';
 import 'package:ToDoFlutter/domain/state/auth_state.dart';
-import 'package:ToDoFlutter/internal/dependencies/auth_module.dart';
 import 'package:ToDoFlutter/presentation/components/button.dart';
 import 'package:ToDoFlutter/presentation/components/input.dart';
 import 'package:ToDoFlutter/presentation/components/app_title.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -18,19 +18,13 @@ class _RegistrationState extends State<RegistrationScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  AuthState _authState;
-
-  @override
-  void initState() {
-    super.initState();
-    _authState = AuthModule.authState();
-  }
-
   void _auth(BuildContext context) {
+    final AuthState authState = Provider.of<AuthState>(context, listen: false);
+
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
-    _authState.auth(email: email, password: password).then((bool result) {
+    authState.auth(email: email, password: password).then((bool result) {
       if (result)
         Navigator.pushNamedAndRemoveUntil(context, notes, (_) => false);
     });
@@ -42,6 +36,8 @@ class _RegistrationState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthState authState = Provider.of<AuthState>(context);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -68,7 +64,7 @@ class _RegistrationState extends State<RegistrationScreen> {
               ),
             ),
             Observer(builder: (_) {
-              if (_authState.isAuthLoading)
+              if (authState.isAuthLoading)
                 return const CircularProgressIndicator();
 
               return Button(
