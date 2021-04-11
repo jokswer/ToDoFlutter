@@ -1,6 +1,14 @@
+import 'package:ToDoFlutter/domain/model/note.dart';
 import 'package:flutter/material.dart';
 
 class NoteCard extends StatelessWidget {
+  final Note note;
+  final Function() onCardTap;
+  final Function() onDeleteTap;
+
+  const NoteCard({Key key, this.note, this.onCardTap, this.onDeleteTap})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -12,21 +20,27 @@ class NoteCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const Text('title'),
-              const Text('text'),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  Switch(value: true, onChanged: null),
-                  Text('Удалить')
-                ],
-              )
+              Column(children: <Widget>[
+                Text(
+                  note.title,
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                ),
+                Text(
+                  note.body,
+                  style: const TextStyle(fontSize: 12, color: Colors.black),
+                ),
+              ]),
+              TextButton(
+                  onPressed: onDeleteTap,
+                  child: const Text(
+                    'Удалить',
+                    style: TextStyle(fontSize: 14, color: Colors.redAccent),
+                  ))
             ],
           ),
         ),
       ),
+      onTap: onCardTap,
     );
   }
-  
 }
