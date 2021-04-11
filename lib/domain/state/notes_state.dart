@@ -12,14 +12,43 @@ abstract class NotesStateBase with Store {
   NotesStateBase(this._notesRepository);
 
   @observable
-  List<Note> notes;
+  ObservableList<Note> notes;
+
+  @observable
+  bool listIsLoading = false;
 
   @action
   Future<void> receive() async {
     try {
-      notes = await _notesRepository.receive();
+      listIsLoading = true;
+      notes = ObservableList<Note>.of(await _notesRepository.receive());
     } catch (e) {
       print('receiveError ${e.toString()}');
+    } finally {
+      listIsLoading = false;
+    }
+  }
+
+  @action
+  Future<bool> create({String title, String body, bool done}) async {
+    try {
+      await _notesRepository.create(title: title, body: body, done: done);
+      await receive();
+
+      return true;
+    } catch (e) {
+      print('createError ${e.toString()}');
+      return false;
+    }
+  }
+
+  @action
+  Future<void> delete({int id}) async {
+    try {
+      await _notesRepository.delete(id: id);
+      await receive();
+    } catch (e) {
+      print('deleteError ${e.toString()}');
     }
   }
 }

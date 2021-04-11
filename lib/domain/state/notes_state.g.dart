@@ -12,15 +12,30 @@ mixin _$NotesState on NotesStateBase, Store {
   final _$notesAtom = Atom(name: 'NotesStateBase.notes');
 
   @override
-  List<Note> get notes {
+  ObservableList<Note> get notes {
     _$notesAtom.reportRead();
     return super.notes;
   }
 
   @override
-  set notes(List<Note> value) {
+  set notes(ObservableList<Note> value) {
     _$notesAtom.reportWrite(value, super.notes, () {
       super.notes = value;
+    });
+  }
+
+  final _$listIsLoadingAtom = Atom(name: 'NotesStateBase.listIsLoading');
+
+  @override
+  bool get listIsLoading {
+    _$listIsLoadingAtom.reportRead();
+    return super.listIsLoading;
+  }
+
+  @override
+  set listIsLoading(bool value) {
+    _$listIsLoadingAtom.reportWrite(value, super.listIsLoading, () {
+      super.listIsLoading = value;
     });
   }
 
@@ -31,10 +46,26 @@ mixin _$NotesState on NotesStateBase, Store {
     return _$receiveAsyncAction.run(() => super.receive());
   }
 
+  final _$createAsyncAction = AsyncAction('NotesStateBase.create');
+
+  @override
+  Future<bool> create({String title, String body, bool done}) {
+    return _$createAsyncAction
+        .run(() => super.create(title: title, body: body, done: done));
+  }
+
+  final _$deleteAsyncAction = AsyncAction('NotesStateBase.delete');
+
+  @override
+  Future<void> delete({int id}) {
+    return _$deleteAsyncAction.run(() => super.delete(id: id));
+  }
+
   @override
   String toString() {
     return '''
-notes: ${notes}
+notes: ${notes},
+listIsLoading: ${listIsLoading}
     ''';
   }
 }
