@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ToDoFlutter/domain/state/notes_state.dart';
-import 'package:ToDoFlutter/internal/dependencies/notes_module.dart';
-import 'package:ToDoFlutter/presentation/components/note_card.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:ToDoFlutter/routes/paths.dart';
+import 'package:ToDoFlutter/domain/state/notes_state.dart';
+import 'package:ToDoFlutter/presentation/components/note_card.dart';
+import 'package:provider/provider.dart';
 
 class NotesScreen extends StatefulWidget {
   @override
@@ -12,17 +13,25 @@ class NotesScreen extends StatefulWidget {
 }
 
 class _NotesState extends State<NotesScreen> {
-  NotesState _notesState;
-
   @override
   void initState() {
     super.initState();
-    _notesState = NotesModule.notesState();
-    _notesState.receive();
+
+    context.read<NotesState>().receive();
+  }
+
+  void _navigateToNote(BuildContext context) {
+    Navigator.pushNamed(context, note);
+  }
+
+  void _delete(int id) {
+    context.read<NotesState>().delete(id: id);
   }
 
   @override
   Widget build(BuildContext context) {
+    final NotesState notesState = Provider.of<NotesState>(context);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Заметки'),
@@ -37,7 +46,7 @@ class _NotesState extends State<NotesScreen> {
           actions: <Widget>[
             GestureDetector(
                 onTap: () {
-                  //TODO:
+                  _navigateToNote(context);
                 },
                 child: const Icon(
                   Icons.add,
@@ -48,13 +57,35 @@ class _NotesState extends State<NotesScreen> {
         ),
         body: Observer(
           builder: (_) {
+            if (notesState.listIsLoading)
+              const Center(
+                  child: Text(
+                'Загрузка...',
+                style: TextStyle(fontSize: 18),
+              ));
+
+            if (notesState.notes == null || notesState.notes.isEmpty)
+              return const Center(
+                  child: Text(
+                'Ничего нет!',
+                style: TextStyle(fontSize: 18),
+              ));
+
             return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
-                itemCount: _notesState.notes?.length,
+                itemCount: notesState.notes.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return NoteCard();
+                  return NoteCard(
+                    note: notesState.notes[index],
+                    onCardTap: () {
+                      _navigateToNote(context);
+                    },
+                    onDeleteTap: () {
+                      _delete(notesState.notes[index].id);
+                    },
+                  );
                 });
           },
         ));
